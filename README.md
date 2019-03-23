@@ -21,6 +21,7 @@ Opted to write it in golang because:
 
 ## Ideas
 
+- no months?
 - Benchmarks
 - dockerise
 - CI
