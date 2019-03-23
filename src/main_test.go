@@ -2,7 +2,6 @@ package main
 
 import (
 	"os"
-	"strconv"
 	"testing"
 )
 
@@ -13,7 +12,16 @@ func TestHandleArguments(t *testing.T) {
 	actual := handleArguments()
 
 	if actual != expected {
-		t.Errorf("Test failed, expected: '%s', got:  '%s'", strconv.Itoa(expected), strconv.Itoa(actual))
+		t.Errorf("Test failed, expected: '%d', got:  '%d'", expected, actual)
+	}
+}
+
+func TestSecondsToMinutes(t *testing.T) {
+	expected := "1 minutes, 1 seconds"
+	actual := secondsToMinutes(61)
+
+	if actual != expected {
+		t.Errorf("Test failed, expected: %s, got: %s", expected, actual)
 	}
 }
 

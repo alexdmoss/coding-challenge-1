@@ -11,7 +11,10 @@ func main() {
 
 	var input = handleArguments()
 
-	fmt.Println(input)
+	var output = secondsToMinutes(input)
+
+	fmt.Println(output)
+
 }
 
 func handleArguments() int {
@@ -38,4 +41,11 @@ func handleArguments() int {
 
 	return inputSeconds
 
+}
+
+func secondsToMinutes(inSeconds int) string {
+	minutes := inSeconds / 60
+	seconds := inSeconds % 60
+	out := fmt.Sprintf("%d minutes, %d seconds", minutes, seconds)
+	return out
 }
