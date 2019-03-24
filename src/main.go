@@ -15,16 +15,31 @@ func main() {
 	var hours int
 	var days int
 	var years int
+	var output string
 
-	minutes, seconds = minutesFromSeconds(totalSeconds)
-	fmt.Printf("%d minutes, %d seconds\n", minutes, seconds)
-	hours, minutes = hoursFromMinutes(minutes)
-	fmt.Printf("%d hours, %d minutes\n", hours, minutes)
-	days, hours = daysFromHours(hours)
-	fmt.Printf("%d days, %d hours\n", days, hours)
-	years, days = yearsFromDays(days)
+	years, days, hours, minutes, seconds = convertSecondsToForecast(totalSeconds)
 
-	fmt.Printf("%d years, %d days, %d hours, %d minutes, %d seconds", years, days, hours, minutes, seconds)
+	output = formatAndDisplayOutput(years, days, hours, minutes, seconds)
+
+	// print to screen, but could be wrapped as alternate output
+	fmt.Println(output)
+
+}
+
+// converts integer values to compliant string and prints to screen
+func formatAndDisplayOutput(years int, days int, hours int, minutes int, seconds int) string {
+	output := fmt.Sprintf("%d years, %d days, %d hours, %d minutes, %d seconds", years, days, hours, minutes, seconds)
+	return output
+}
+
+func convertSecondsToForecast(inputSeconds int) (int, int, int, int, int) {
+
+	minutes, seconds := minutesFromSeconds(inputSeconds)
+	hours, minutes := hoursFromMinutes(minutes)
+	days, hours := daysFromHours(hours)
+	years, days := yearsFromDays(days)
+
+	return years, days, hours, minutes, seconds
 
 }
 
