@@ -10,7 +10,7 @@ import (
 func TestFormatAndDisplayOutput(t *testing.T) {
 
 	thisFunc := getFunction()
-	expected := "1 years, 2 days, 3 hours, 4 minutes, 5 seconds"
+	expected := "1 years, 2 days, 3 hours, 4 minutes and 5 seconds"
 	actual := formatAndDisplayOutput(1, 2, 3, 4, 5)
 
 	if actual != expected {
@@ -168,10 +168,16 @@ func getFunction() string {
 // is input an integer
 // is input integer not negative
 // is input a very large number
-
 // giant number
-
 // 0 = none
+
+// From spec:
+// `formatTime(1)` should return `1 second`
+// `formatTime(62)` should return `1 minute and 2 seconds`
+// `formatTime(3662)` should return a time of `1 hour, 1 minute and 2 seconds`
+// `3 years and 24 minutes`
+// `3 days, 4 hours and 1 minute`
+// Can we write tests for: Seconds must not be larger than 59, minutes must not be larger than 59, an hour must not be larger than 23, and days must not be larger than 364.
 
 // 1 = 1 second
 // 2 = 2 seconds

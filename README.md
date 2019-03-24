@@ -21,7 +21,8 @@ Opted to write it in golang because:
 
 ## Ideas
 
-- no months?
+- enhancement: months? Could be satisfied by time difference using Time functions
+- enhancement: leap years? Could be satisfied by time difference using Time functions
 - Benchmarks
 - dockerise
 - CI

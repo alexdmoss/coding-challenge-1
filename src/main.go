@@ -5,31 +5,96 @@ import (
 	"log"
 	"os"
 	"strconv"
+	"strings"
 )
+
+type TimeValues struct {
+	Years   int
+	Days    int
+	Hours   int
+	Minutes int
+	Seconds int
+}
 
 func main() {
 
-	var totalSeconds = handleArguments()
+	output := FormatTime()
+
+	// print to screen, but could be wrapped in alternatives
+	fmt.Println(output)
+
+}
+
+// FormatTime receives an integer number of seconds and returns a string in human-readable format
+func FormatTime() string {
+
+	var output string
 	var seconds int
 	var minutes int
 	var hours int
 	var days int
 	var years int
-	var output string
 
-	years, days, hours, minutes, seconds = convertSecondsToForecast(totalSeconds)
+	totalSeconds := handleArguments()
 
-	output = formatAndDisplayOutput(years, days, hours, minutes, seconds)
+	if totalSeconds == 0 {
 
-	// print to screen, but could be wrapped as alternate output
-	fmt.Println(output)
+		output = "None"
+
+	} else {
+
+		years, days, hours, minutes, seconds = convertSecondsToForecast(totalSeconds)
+
+		output = formatAndDisplayOutput(years, days, hours, minutes, seconds)
+
+	}
+
+	return output
 
 }
 
 // converts integer values to compliant string and prints to screen
 func formatAndDisplayOutput(years int, days int, hours int, minutes int, seconds int) string {
-	output := fmt.Sprintf("%d years, %d days, %d hours, %d minutes, %d seconds", years, days, hours, minutes, seconds)
-	return output
+
+	// if one number, just print it
+	// if we have two numbers, print with an 'and'
+	// if we have more than two numbers, print with ',' until the last which is 'and'
+
+	var output []string
+
+	calculatedValues := TimeValues{
+		Years:   years,
+		Days:    days,
+		Hours:   hours,
+		Minutes: minutes,
+		Seconds: seconds,
+	}
+
+	if calculatedValues.Years > 0 {
+		output = append(output, fmt.Sprintf("%d years", calculatedValues.Years))
+	}
+	if calculatedValues.Days > 0 {
+		output = append(output, fmt.Sprintf("%d days", calculatedValues.Days))
+	}
+	if calculatedValues.Hours > 0 {
+		output = append(output, fmt.Sprintf("%d hours", calculatedValues.Hours))
+	}
+	if calculatedValues.Minutes > 0 {
+		output = append(output, fmt.Sprintf("%d minutes", calculatedValues.Minutes))
+	}
+	if calculatedValues.Seconds > 0 {
+		output = append(output, fmt.Sprintf("%d seconds", calculatedValues.Seconds))
+	}
+
+	// join with commas then replace last comma with 'and'
+	out := fmt.Sprint(strings.Join(output, ", "))
+	i := strings.LastIndex(out, ",")
+	if i > 0 {
+		out = out[:i] + strings.Replace(out[i:], ",", " and", 1)
+	}
+
+	return out
+
 }
 
 func convertSecondsToForecast(inputSeconds int) (int, int, int, int, int) {

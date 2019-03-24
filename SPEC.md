@@ -2,7 +2,7 @@
 
 We need to tell customers when our next big marketing event is starting.
 
-Your task is to create a function called formatTime that accepts an integer which represents a time in seconds and returns a string which represents the time in a more readable format. The time will be zero or larger.
+*[done]* Your task is to create a function called formatTime that accepts an integer which represents a time in seconds and returns a string which represents the time in a more readable format. The time will be zero or larger.
 
 For example:
 
@@ -16,9 +16,9 @@ Other valid results include:
 
 The format must be precise:
 
-1. If there is more than one time component then last two components must be separated by “ and “, i.e. the word “and” with a leading and trailing space, and other time components must be separated by “, “, i.e. a comma with a trailing space.
-2. Higher order time units should appear first, e.g. years must appear before days.
-3. A year always has 365 days.
-4. Time units/values should only be included in the output if values are greater than zero.
+1. *[done]* If there is more than one time component then last two components must be separated by “ and “, i.e. the word “and” with a leading and trailing space, and other time components must be separated by “, “, i.e. a comma with a trailing space.
+2. *[done]* Higher order time units should appear first, e.g. years must appear before days.
+3. *[assumed]* A year always has 365 days.
+4.*[done]*  Time units/values should only be included in the output if values are greater than zero.
 5. Seconds must not be larger than 59, minutes must not be larger than 59, an hour must not be larger than 23, and days must not be larger than 364. 
-6. If the time is zero then return a string containing “none”.
+6. *[done]* If the time is zero then return a string containing “none”.
