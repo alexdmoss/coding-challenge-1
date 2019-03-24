@@ -9,11 +9,22 @@ import (
 
 func main() {
 
-	var input = handleArguments()
+	var totalSeconds = handleArguments()
+	var seconds int
+	var minutes int
+	var hours int
+	var days int
+	var years int
 
-	var output = secondsToMinutes(input)
+	minutes, seconds = minutesFromSeconds(totalSeconds)
+	fmt.Printf("%d minutes, %d seconds\n", minutes, seconds)
+	hours, minutes = hoursFromMinutes(minutes)
+	fmt.Printf("%d hours, %d minutes\n", hours, minutes)
+	days, hours = daysFromHours(hours)
+	fmt.Printf("%d days, %d hours\n", days, hours)
+	years, days = yearsFromDays(days)
 
-	fmt.Println(output)
+	fmt.Printf("%d years, %d days, %d hours, %d minutes, %d seconds", years, days, hours, minutes, seconds)
 
 }
 
@@ -43,9 +54,26 @@ func handleArguments() int {
 
 }
 
-func secondsToMinutes(inSeconds int) string {
+func minutesFromSeconds(inSeconds int) (int, int) {
 	minutes := inSeconds / 60
 	seconds := inSeconds % 60
-	out := fmt.Sprintf("%d minutes, %d seconds", minutes, seconds)
-	return out
+	return minutes, seconds
+}
+
+func hoursFromMinutes(inSeconds int) (int, int) {
+	hours := inSeconds / 60
+	minutes := inSeconds % 60
+	return hours, minutes
+}
+
+func daysFromHours(inSeconds int) (int, int) {
+	days := inSeconds / 24
+	hours := inSeconds % 24
+	return days, hours
+}
+
+func yearsFromDays(inSeconds int) (int, int) {
+	years := inSeconds / 365
+	days := inSeconds % 365
+	return years, days
 }
