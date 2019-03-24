@@ -19,6 +19,13 @@ Opted to write it in golang because:
 
 ---
 
+## To Do 
+
+- [ ] Plural words 
+- [ ] CI
+- [ ] Push to dockerhub 
+- [ ] Benchmarks 
+
 ## Ideas
 
 - enhancement: months? Could be satisfied by time difference using Time functions

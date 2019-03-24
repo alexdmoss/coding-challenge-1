@@ -13,8 +13,7 @@ function help() {
   echo -e "    run                Run locally without building binary"
   echo -e "    build              Build binary locally"
   echo -e "    test               Run local unit tests"
-  echo -e "    docker-build       Bake docker image"
-  echo -e "    docker-run         Run docker image locally"
+  echo -e "    build-docker       Bake docker image and run smoke tests locally"
   echo -e 
   exit 0
 }
@@ -74,7 +73,7 @@ function build() {
 
 }
 
-function docker-build() {
+function build-docker() {
 
     _console_msg "Creating docker image ..."
 
@@ -82,23 +81,15 @@ function docker-build() {
 
     docker build -t format-time .
 
-    popd > /dev/null
+    _console_msg "Build complete, running smokes ..."
 
-    _console_msg "Build complete"
-
-}
-
-function docker-run() {
-
-    _console_msg "Running docker image locally ..."
-
-    pushd $(pwd) >/dev/null
-
-    docker run format-time .
+    docker run format-time 61
 
     popd > /dev/null
 
-    _console_msg "Build complete"
+    _console_msg "Docker build complete. To use this program locally:
+
+          docker run format-time <time-in-seconds>"
 
 }
 
@@ -143,7 +134,7 @@ function _console_msg() {
     (echo "-> [${level}]${ts} ${msg}")
   fi
   echo ""
-  
+
 }
 
 function ctrl_c() {
@@ -155,7 +146,7 @@ function ctrl_c() {
 
 trap ctrl_c INT
 
-if [[ ${1:-} =~ ^(help|run|build|test|docker-build|docker-run)$ ]]; then
+if [[ ${1:-} =~ ^(help|run|build|test|build-docker)$ ]]; then
   COMMAND=${1}
   shift
   $COMMAND "$@"
